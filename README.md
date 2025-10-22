@@ -16,3 +16,8 @@ Once within a nix shell and within the root directory of the repo, use the `make
 python -m http.server
 Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 ```
+
+# Useful links
+[GENERAL LORE/VIBES](./docs/lore.md)
+[GAME MECHANICS](./docs/game_mechanics.md)
+[DUNGEON GENERATION](./docs/dungeon_generation.md)
