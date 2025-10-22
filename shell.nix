@@ -5,6 +5,7 @@ pkgs.mkShell {
     python311
     git
     gnumake
+    gh
   ];
 
   shellHook = ''
