@@ -6,6 +6,11 @@
 - The black sections of the template are what should be "filled in"
 - Each "connecting edge center" of a tile will be at the 32 pixel mark
 - Each connecting edge should overfill by **exactly** 2 solid pixels past the 32 pixel mark.
+- Tiles with "depth" (e.g. walls) should replace their 2 solid pixels past the 32 pixel mark with a shadow.
+  - Shadows should be a dark grey color leaning more towards mostly black.
+  - The shadows opacity should be around 65%
+  - Bottom horizontal and diagonal borders should get 3 pixels thick shadow
+  - Vertical borders should recieve 1 pixel. This technically doesn't make sense from a rendering perspective, but it makes the image pop.
 
 ### Start with template
 ![template_tile_example](/assets/tilesets/tile_template.png)
