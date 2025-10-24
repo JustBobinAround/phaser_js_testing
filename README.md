@@ -18,7 +18,7 @@ Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 ```
 
 # Useful links
-- [Tileset Rules](./assets/tilesets/tile_template_rules.md)
+- [TILESET RULES](./assets/tilesets/tile_template_rules.md)
 - [GENERAL LORE/VIBES](./docs/lore.md)
 - [GAME MECHANICS](./docs/game_mechanics.md)
 - [DUNGEON GENERATION](./docs/dungeon_generation.md)
