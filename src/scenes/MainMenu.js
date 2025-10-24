@@ -5,8 +5,17 @@ export class MainMenu extends Scene {
         super('MainMenu');
     }
 
+    preload() {
+        this.load.audio('test_music', '/assets/music_samples/store_or_town_music_sample.wav');
+    }
+
     create() {
         this.add.image(512, 384, 'background');
+
+        var music = this.sound.add('test_music');
+
+        music.setLoop(true);
+        music.play();
 
         // this.add.image(512, 300, 'logo');
         
