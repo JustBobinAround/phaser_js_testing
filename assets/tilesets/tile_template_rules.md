@@ -1,6 +1,8 @@
 # Tile Template Rules
 
 - Each tile is 64x64 pixels
+- A standard full tile set should be composed of 16 tiles which will total to 256x256 pixels
+- A blending/pixel randomizer tool should be used over the entire tileset to help obfuscate tile separation
 - The black sections of the template are what should be "filled in"
 - Each "connecting edge center" of a tile will be at the 32 pixel mark
 - Each connecting edge should overfill by **exactly** 2 solid pixels past the 32 pixel mark.
