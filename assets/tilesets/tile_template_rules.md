@@ -18,3 +18,5 @@
 ![template_tile_example](/assets/tilesets/dirt.png)
 ### At the connection between two tiles, make sure each tile over extends by 2 pixels
 ![template_tile_example](/assets/tilesets/template_tile_example.png)
+### Depth example
+![wall_example](/assets/tilesets/castle_walls_stone_irone_pointed.png)
