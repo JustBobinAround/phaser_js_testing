@@ -717,7 +717,7 @@ export class Game extends Scene {
     }
 
     preload() {
-        this.load.image("tilemap", "../assets/tilesets/castle_walls_stone_irone_pointed.png");
+        this.load.image("tilemap", "/assets/tilesets/castle_walls_stone_irone_pointed.png");
     }
 
     create() {
