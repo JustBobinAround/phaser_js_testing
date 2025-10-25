@@ -12,6 +12,15 @@
     <div id="app">
         <div id="game-container"></div>
     </div>
+    <script>
+        const host = window.location.hostname;
+        let baseHref = '/phaser_js_testing/';
+
+        if (!(host '0.0.0.0' || host === 'localhost' || host === '127.0.0.1')) {
+            document.write(`<base href="${baseHref}">`);
+        }
+        
+    </script>
     <script type="importmap">
         {
             "imports": {
@@ -19,7 +28,7 @@
             }
         }
     </script>
-    <script type="module" src="./src/main.js"></script>
+    <script type="module" src="/src/main.js"></script>
 </body>
 
 </html>
