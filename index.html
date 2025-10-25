@@ -13,20 +13,45 @@
         <div id="game-container"></div>
     </div>
     <script>
-        const host = window.location.hostname;
-        let baseHref = '/phaser_js_testing/';
 
-        if (!(host '0.0.0.0' || host === 'localhost' || host === '127.0.0.1')) {
-            document.write(`<base href="${baseHref}">`);
-        }
-        
-    </script>
-    <script type="importmap">
-        {
-            "imports": {
-                "phaser": "//cdn.jsdelivr.net/npm/phaser@^3.90.0/dist/phaser.esm.js"            
+        (function() {
+            const host = window.location.hostname;
+            let baseHref = '/phaser_js_testing/';
+
+            if (!(host === '0.0.0.0' || host === 'localhost' || host === '127.0.0.1')) {
+                document.write('<base href="'+baseHref+'">');
             }
-        }
+
+            const importMaps = {
+                'localhost': {
+                    "imports": {
+                        "phaser": "/libs/phaser.esm.js"            
+                    }
+                },
+                '127.0.0.1': {
+                    "imports": {
+                        "phaser": "/libs/phaser.esm.js"            
+                    }
+                },
+                '0.0.0.0': {
+                    "imports": {
+                        "phaser": "/libs/phaser.esm.js"            
+                    }
+                },
+                'default': {
+                    "imports": {
+                        "phaser": "//cdn.jsdelivr.net/npm/phaser@^3.90.0/dist/phaser.esm.js"            
+                    }
+                }
+            };
+
+            const selectedMap = importMaps[host] || importMaps['default'];
+            const script = document.createElement('script');
+            script.type = 'importmap';
+            script.textContent = JSON.stringify(selectedMap, null, 2);
+
+            document.currentScript.after(script);
+        })();
     </script>
     <script type="module" src="/src/main.js"></script>
 </body>
