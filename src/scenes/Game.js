@@ -1,4 +1,18 @@
 import { Scene } from 'phaser';
+import init, { find_paths } from "/libs/wasm/path_finder.js";
+
+async function calculate_paths(world) {
+    await init();
+
+    try {
+        const world_json = JSON.stringify(world);
+        const ans = JSON.parse(find_paths(world_json));
+        return ans;
+    } catch (e) {
+        console.error("failed to use wasm path finder", e);
+        return [];
+    }
+}
 
 function to_icardinal(c) {
     return {
@@ -525,11 +539,8 @@ function is_closed_off(world, x, y) {
 }
 
 function make_connection(connection_map, root_cords, world, from) {
-    console.log(from);
     if(connection_map[from]) {
-        console.log(from);
         var to = connection_map[from];
-        console.log(to);
         
         from = from_str_cord(from);
         if(to.x>from.x) {
@@ -728,39 +739,40 @@ export class Game extends Scene {
         var root_cords = {};
         gen_world(root_cords, unused, world);
         clean_world(root_cords, world);
-        print_world(world);
         world = upscale_world(world);
-        print_world(world);
+        calculate_paths(world).then((paths) => {
+            console.log(paths);
         
-        // console.log(gen_connection_map(root_cords));
-        var world_tilemap = calc_display_tiles(world);
-        print_display(world_tilemap);
-        // console.log(world_tilemap);
+            // console.log(gen_connection_map(root_cords));
+            var world_tilemap = calc_display_tiles(world);
+            // print_display(world_tilemap);
+            // console.log(world_tilemap);
 
-        const map = this.make.tilemap({ data: world_tilemap, tileWidth: 64, tileHeight: 64 });
-        const tilemap = map.addTilesetImage("tilemap");
-        const layer = map.createLayer(0, tilemap, 0, 0);
+            const map = this.make.tilemap({ data: world_tilemap, tileWidth: 64, tileHeight: 64 });
+            const tilemap = map.addTilesetImage("tilemap");
+            const layer = map.createLayer(0, tilemap, 0, 0);
 
-        this.input.mousePointer.motionFactor = 0.5;
-        this.input.pointer1.motionFactor = 0.5;
+            this.input.mousePointer.motionFactor = 0.5;
+            this.input.pointer1.motionFactor = 0.5;
 
-        var cam = this.cameras.main;
+            var cam = this.cameras.main;
 
-        // cam.setZoom(2);
+            // cam.setZoom(2);
 
-        // cam.setBounds(0, 0, map.displayWidth, map.displayHeight);
+            // cam.setBounds(0, 0, map.displayWidth, map.displayHeight);
 
-        this.input.on('pointermove', function (pointer) {
-            if (!pointer.isDown) return;
+            this.input.on('pointermove', function (pointer) {
+                if (!pointer.isDown) return;
 
-            const { x, y } = pointer.velocity;
+                const { x, y } = pointer.velocity;
 
-            cam.scrollX -= x / cam.zoom;
-            cam.scrollY -= y / cam.zoom;
+                cam.scrollX -= x / cam.zoom;
+                cam.scrollY -= y / cam.zoom;
+            });
+        
+            // this.input.once('pointerdown', () => {
+            //     this.scene.start('GameOver');
+            // });
         });
-        
-        // this.input.once('pointerdown', () => {
-        //     this.scene.start('GameOver');
-        // });
     }
 }
